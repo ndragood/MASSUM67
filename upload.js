@@ -1,4 +1,7 @@
-// ===== UPLOAD & DYNAMIC GALLERY =====
+// ===== UPLOAD & DYNAMIC GALLERY (Cloudinary + Firestore) =====
+const CLOUDINARY_CLOUD = 'vlf1nj6q';
+const CLOUDINARY_PRESET = 'boluwdqv';
+
 document.addEventListener('DOMContentLoaded', () => {
   // === Elements ===
   const modal = document.getElementById('upload-modal');
@@ -36,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // === Modal Open/Close ===
+  // === Modal States ===
   function showState(state) {
     [loginState, formState, progressState, successState].forEach(s => {
       if (s) s.style.display = 'none';
@@ -48,11 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!modal) return;
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
-    if (currentUser) {
-      showState(formState);
-    } else {
-      showState(loginState);
-    }
+    showState(currentUser ? formState : loginState);
   }
 
   function closeModal() {
@@ -88,14 +87,11 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.closest('.upload-dropzone__remove')) return;
       uploadInput.click();
     });
-
     uploadArea.addEventListener('dragover', (e) => {
       e.preventDefault();
       uploadArea.classList.add('drag-over');
     });
-    uploadArea.addEventListener('dragleave', () => {
-      uploadArea.classList.remove('drag-over');
-    });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
     uploadArea.addEventListener('drop', (e) => {
       e.preventDefault();
       uploadArea.classList.remove('drag-over');
@@ -143,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // === Upload Submit ===
+  // === Upload to Cloudinary + Save to Firestore ===
   if (submitBtn) {
     submitBtn.addEventListener('click', async () => {
       if (!uploadInput.files.length) return alert('Pilih foto dulu!');
@@ -154,34 +150,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
       try {
         showState(progressState);
+        if (progressText) progressText.textContent = 'Uploading ke Cloudinary...';
 
-        // 1. Upload file to Firebase Storage
-        const fileName = Date.now() + '_' + file.name;
-        const storageRef = storage.ref('gallery/' + fileName);
-        const uploadTask = storageRef.put(file);
+        // 1. Upload to Cloudinary
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', CLOUDINARY_PRESET);
+        formData.append('folder', 'massum67');
 
-        uploadTask.on('state_changed', (snapshot) => {
-          const pct = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-          if (progressText) progressText.textContent = 'Uploading... ' + pct + '%';
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD}/image/upload`, {
+          method: 'POST',
+          body: formData
         });
 
-        await uploadTask;
-        const downloadURL = await storageRef.getDownloadURL();
+        if (!res.ok) throw new Error('Upload ke Cloudinary gagal!');
+        const data = await res.json();
+        const imageUrl = data.secure_url;
+
+        if (progressText) progressText.textContent = 'Menyimpan ke database...';
 
         // 2. Save metadata to Firestore
         await db.collection('gallery').add({
-          imageUrl: downloadURL,
+          imageUrl: imageUrl,
           caption: caption || 'Untitled',
           category: selectedCategory,
           uploadedBy: currentUser.displayName || currentUser.email,
           uploadedAt: firebase.firestore.FieldValue.serverTimestamp()
         });
 
-        // 3. Show success
+        // 3. Success!
         showState(successState);
         setTimeout(() => {
           closeModal();
-          loadGalleryFromFirestore(); // Refresh gallery
+          loadGalleryFromFirestore();
         }, 1500);
 
       } catch (err) {
@@ -203,38 +204,37 @@ document.addEventListener('DOMContentLoaded', () => {
     selectedCategory = 'hangout';
   }
 
-  // === Dynamic Gallery from Firestore ===
+  // === Load Gallery from Firestore ===
   async function loadGalleryFromFirestore() {
     if (typeof db === 'undefined') return;
-
     try {
       const snapshot = await db.collection('gallery')
         .orderBy('uploadedAt', 'desc')
         .get();
 
-      if (snapshot.empty) return; // No uploaded photos yet, keep static ones
+      if (snapshot.empty) return;
 
       const masonry = document.querySelector('#page-gallery .masonry');
       if (!masonry) return;
 
-      // Remove only dynamically-added items (keep static ones)
+      // Remove old dynamic items
       masonry.querySelectorAll('.masonry-item--dynamic').forEach(el => el.remove());
 
       snapshot.forEach(doc => {
-        const data = doc.data();
+        const d = doc.data();
         const item = document.createElement('div');
         item.className = 'masonry-item masonry-item--dynamic';
-        item.setAttribute('data-gallery-item', data.category || 'hangout');
+        item.setAttribute('data-gallery-item', d.category || 'hangout');
         item.innerHTML = `
-          <img alt="${data.caption || ''}" src="${data.imageUrl}" loading="lazy" />
+          <img alt="${d.caption || ''}" src="${d.imageUrl}" loading="lazy" />
           <div class="masonry-item__overlay">
-            <span class="masonry-item__label label-md">${(data.caption || '').toUpperCase()}</span>
+            <span class="masonry-item__label label-md">${(d.caption || '').toUpperCase()}</span>
           </div>
         `;
         masonry.prepend(item);
       });
 
-      // Re-apply current gallery filter
+      // Re-apply gallery filter
       const activeFilter = document.querySelector('[data-gallery-filter].active');
       if (activeFilter) activeFilter.click();
 
@@ -243,6 +243,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Load on page start
   loadGalleryFromFirestore();
 });
