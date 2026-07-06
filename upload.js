@@ -286,7 +286,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         await auth.signInWithEmailAndPassword(email, password);
         currentUser = auth.currentUser;
-        showState(formState);
+        
+        // Cek role untuk UX redirect
+        const docSnap = await db.collection('users').doc(currentUser.uid).get();
+        let role = docSnap.exists ? (docSnap.data().role || 'member') : 'member';
+        if (email === 'bukabukagame456@gmail.com') role = 'super_admin';
+
+        if (role === 'admin' || role === 'super_admin') {
+          showState(formState);
+        } else {
+          closeModal();
+          alert('Berhasil login sebagai Member!');
+        }
       } catch (err) {
         console.error('Login error:', err);
         alert('Login gagal: ' + err.message);
@@ -329,7 +340,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         currentUser = user;
-        showState(formState);
+        
+        let initialRole = 'member';
+        if (email === 'bukabukagame456@gmail.com') initialRole = 'super_admin';
+
+        if (initialRole === 'super_admin') {
+          showState(formState);
+        } else {
+          closeModal();
+          alert('Berhasil daftar! Akun kamu berstatus MEMBER. Hubungi admin jika butuh akses upload foto.');
+        }
       } catch (err) {
         console.error('Register error:', err);
         alert('Daftar gagal: ' + err.message);
