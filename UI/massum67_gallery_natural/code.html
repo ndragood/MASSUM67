@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MASSUM67 | Gallery &amp; Achievements</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed": "#d8e3fa",
+                        "inverse-on-surface": "#f1f1ef",
+                        "on-surface": "#1a1c1b",
+                        "on-primary-fixed-variant": "#2e4e30",
+                        "surface-container-low": "#f4f3f1",
+                        "surface-container-high": "#e9e8e6",
+                        "on-background": "#1a1c1b",
+                        "on-surface-variant": "#424841",
+                        "outline": "#737970",
+                        "surface-variant": "#e3e2e0",
+                        "tertiary": "#515c70",
+                        "surface-bright": "#faf9f7",
+                        "primary-fixed": "#c6edc4",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#111c2c",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#abd0a9",
+                        "surface": "#faf9f7",
+                        "secondary-fixed": "#eae1d4",
+                        "on-tertiary-fixed-variant": "#3c475a",
+                        "surface-container-highest": "#e3e2e0",
+                        "on-secondary-fixed": "#1f1b13",
+                        "surface-tint": "#456646",
+                        "secondary-container": "#e7dfd1",
+                        "on-error-container": "#93000a",
+                        "secondary": "#635e53",
+                        "on-primary-container": "#f7fff2",
+                        "primary-container": "#5b7d5b",
+                        "primary": "#436444",
+                        "on-secondary-container": "#676257",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#abd0a9",
+                        "tertiary-container": "#6a7589",
+                        "background": "#faf9f7",
+                        "inverse-surface": "#2f3130",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed-dim": "#bcc7dd",
+                        "on-tertiary-container": "#fefcff",
+                        "on-secondary-fixed-variant": "#4b463d",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#cdc6b9",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c2c8be",
+                        "surface-dim": "#dadad8",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed": "#012108",
+                        "surface-container": "#efeeec"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "margin-desktop": "64px",
+                        "sm": "12px",
+                        "margin-mobile": "16px",
+                        "lg": "48px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Plus Jakarta Sans", "sans-serif"],
+                        "body-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "headline-md": ["Source Serif 4", "serif"],
+                        "headline-xl": ["Source Serif 4", "serif"],
+                        "headline-lg-mobile": ["Source Serif 4", "serif"],
+                        "headline-lg": ["Source Serif 4", "serif"],
+                        "label-md": ["Plus Jakarta Sans", "sans-serif"],
+                        "label-sm": ["Plus Jakarta Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "500" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600&amp;family=Source+Serif+4:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .masonry {
+            column-count: 1;
+            column-gap: 24px;
+        }
+        @media (min-width: 768px) {
+            .masonry { column-count: 2; }
+        }
+        @media (min-width: 1024px) {
+            .masonry { column-count: 3; }
+        }
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md text-on-background bg-background min-h-screen flex flex-col">
+<!-- TopNavBar -->
+<nav class="w-full sticky top-0 z-50 bg-surface/70 backdrop-blur-xl border-b border-outline-variant/30">
+<div class="flex justify-between items-center max-w-[1280px] mx-auto px-margin-desktop py-4">
+<div class="font-headline-md text-headline-md font-semibold text-primary">MASSUM67</div>
+<!-- Desktop Nav -->
+<div class="hidden md:flex items-center space-x-md">
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-secondary-container/50 px-4 py-2 rounded-lg transition-all duration-300 ease-in-out" href="#">Home</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-secondary-container/50 px-4 py-2 rounded-lg transition-all duration-300 ease-in-out" href="#">Roster</a>
+<a class="font-label-md text-label-md text-secondary hover:text-primary transition-colors hover:bg-secondary-container/50 px-4 py-2 rounded-lg transition-all duration-300 ease-in-out" href="#">About</a>
+<a class="font-label-md text-label-md text-primary font-bold border-b-2 border-primary pb-1 px-4 py-2 transition-all duration-300 ease-in-out" href="#">Gallery</a>
+</div>
+<button class="hidden md:block bg-primary text-on-primary px-6 py-2 rounded-lg font-label-md text-label-md transition-all duration-300 ease-in-out hover:bg-primary/90 shadow-sm hover:shadow">
+            Join Guild
+        </button>
+<!-- Mobile Menu Icon -->
+<button class="md:hidden text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">menu</span>
+</button>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-xl pb-xl px-margin-desktop max-w-[1280px] mx-auto w-full">
+<!-- Header Section -->
+<header class="mb-xl text-center md:text-left">
+<h1 class="font-headline-xl text-headline-xl text-on-surface mb-base md:text-headline-xl font-headline-xl text-headline-lg-mobile font-headline-lg-mobile tracking-tighter">COMBAT RECORD &amp; GALLERY</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Visual evidence of digital dominance. Explore operational screenshots, victory highlights, and the collective's earned commendations.</p>
+</header>
+<!-- Gallery Section -->
+<section class="mb-xl">
+<div class="flex items-center justify-between mb-lg border-b border-surface-container-highest pb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">photo_library</span>
+                Operational Captures
+            </h2>
+<div class="font-label-md text-label-md text-secondary flex gap-6">
+<button class="text-primary hover:text-primary transition-colors font-bold border-b border-primary">ALL</button>
+<button class="hover:text-primary transition-colors">TOURNAMENTS</button>
+<button class="hover:text-primary transition-colors">RAIDS</button>
+</div>
+</div>
+<div class="masonry">
+<!-- Gallery Item 1 -->
+<div class="masonry-item relative group overflow-hidden rounded-xl bg-surface border border-outline-variant hover:shadow-md transition-all duration-300">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A high-octane esports tournament stage bathed in aggressive neon purple and cyan lighting. Large holographic screens display a chaotic, fast-paced cyberpunk shooter game. The atmosphere is tense and electrifying, with sharp geometric stage elements and a high-contrast midnight aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtr-hGy4ypShum5-dzObnrvj25KLfYjsr31tCTo24mRwo9_cf54IjSG0NDpm-OU4niDeX_YF1nEpYHzCTEcTVMIhjOjKCg_khGnPfKd3NYKd4vMP01mk97wBJXRTesyryzcyI1EX6ptwCXNgI8Teo0VT6WYikra5rdfdu8jviXVv-cH1Z9RG54Jv9appT7atNA2pbL-gELiX9vXv7PHzXkP4n0tDEJT02dO8r61Vm64IlAmUyzhFs"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<p class="font-label-md text-label-md text-on-surface">CHAMPIONSHIP FINALS 2024</p>
+</div>
+</div>
+<!-- Gallery Item 2 -->
+<div class="masonry-item relative group overflow-hidden rounded-xl bg-surface border border-outline-variant hover:shadow-md transition-all duration-300">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A detailed, hyper-realistic screenshot of a futuristic tactical planning map from a sci-fi video game. The interface features glowing cyan and deep purple nodes over a dark, obsidian-like topography. Subtle digital noise and grid lines overlay the terrain, emphasizing a high-tech, strategic midnight operation aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD7u2lrmdaQEPKWbvtlWLp9SVH8ICEbKinOAWrq_6rNhdwtk3R1oULjdafD6kLPESgy0Jl-GylcL_uWekhjQMycmFyQXKdrW65YFpL0Tp8c2o4YJgBg5TmDTxqX2_VvdjDb1kbzFYDArBTODiyEWRLUUXcQH1Njps4hakb7W8EtKCRwUVdrrz9ozhkaSf9TWhjdYCsa1xua3MM5umY46j1U0iqZrepP9RaQ3XVuKMqsyhQcoJLU4Ic"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<p class="font-label-md text-label-md text-on-surface">SECTOR 7 TACTICAL OVERVIEW</p>
+</div>
+</div>
+<!-- Gallery Item 3 -->
+<div class="masonry-item relative group overflow-hidden rounded-xl bg-surface border border-outline-variant hover:shadow-md transition-all duration-300">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A dramatic close-up of an esports team celebrating a victory in a dimly lit arena. The players are silhouetted against a massive screen exploding with vivid cyan and radioactive purple victory graphics. The scene captures a raw, competitive energy with deep black shadows and intense, focused light spills." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAVFcnUuzgzU8PhRg-NYaQnHWFNatSX2S6iYXOTXgCj0kGAydsEreK7fmm-AIJ68aQ10_CgsyTjZUsgCzOgLqjqs30eh7b1u7-CZBGHIMai_Y-fmqbGI6MXE3fQbGA_jtKEKEvmI2T_FJaiHleja_ZblTbkbvoQ9gttLfaeA1BNzBaNNgHdQaQBxJUYlmIbOkFrF2owjlX4b-S-jShO5OlQiL7I39Oc3IScuG8NbdIPSVATxtb7AAY"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<p class="font-label-md text-label-md text-on-surface">VICTORY SECURED</p>
+</div>
+</div>
+<!-- Gallery Item 4 -->
+<div class="masonry-item relative group overflow-hidden rounded-xl bg-surface border border-outline-variant hover:shadow-md transition-all duration-300">
+<img class="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sleek, high-tech gaming setup in a dark room. The mechanical keyboard and specialized mouse glow intensely with customizable RGB lighting in deep purples and bright cyans. The monitors display complex, abstract data streams and game code, reflecting a professional, cyber-futuristic hacker aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASt5od4rZrcbe1wHQW6XkKDUwySfZQdrpfJesDMyBhtYT7EBEWbh9VmbuSLdI3Wo_vB65M_eY9hQp0MG7yMMfBD0CK2L6v7Wvvs5DD2R3p34yGt_voWYKsZqQvROWxoZllRHkFZlOft8XpOHlxR8hLpMndgZciond7PvyybB0_jyg5Pqu4UJwBSrSKFAzuDdy5tE8H_cHWrZ-KSd8e9DgYPlj2aqvknEoJZ8uM5pEMaMULutwGE98"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+<p class="font-label-md text-label-md text-on-surface">COMMAND CENTER CONFIG</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Achievements Section -->
+<section>
+<div class="flex items-center justify-between mb-lg border-b border-surface-container-highest pb-sm">
+<h2 class="font-headline-md text-headline-md text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary">military_tech</span>
+                Achievement Hall
+            </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Achievement 1 -->
+<div class="rounded-xl p-6 bg-surface-container-low border border-outline-variant hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined">emoji_events</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px]">Global Dominance</h3>
+<p class="font-label-sm text-label-sm text-secondary">TIER 1 EVENT</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Secured 1st place in the international cyber-athletics winter tournament, defeating over 500 competing collectives.</p>
+<div class="mt-6 pt-4 border-t border-surface-container-highest flex justify-between items-center text-secondary font-label-md text-label-md">
+<span>EARNED: DEC 2023</span>
+<span class="text-primary font-bold">+500 REP</span>
+</div>
+</div>
+<!-- Achievement 2 -->
+<div class="rounded-xl p-6 bg-surface-container-low border border-outline-variant hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined">stars</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px]">Flawless Execution</h3>
+<p class="font-label-sm text-label-sm text-secondary">SEASON CHALLENGE</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Completed the Grand Raid without a single squad casualty, setting a new server speedrun record.</p>
+<div class="mt-6 pt-4 border-t border-surface-container-highest flex justify-between items-center text-secondary font-label-md text-label-md">
+<span>EARNED: OCT 2023</span>
+<span class="text-primary font-bold">+300 REP</span>
+</div>
+</div>
+<!-- Achievement 3 -->
+<div class="rounded-xl p-6 bg-surface-container-low border border-outline-variant hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+<div class="flex items-center gap-4 mb-4">
+<div class="w-12 h-12 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">swords</span>
+</div>
+<div>
+<h3 class="font-headline-md text-headline-md text-on-surface text-[20px]">Warlord's Fury</h3>
+<p class="font-label-sm text-label-sm text-secondary">PVP MILESTONE</p>
+</div>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant flex-grow">Achieved 10,000 confirmed takedowns in competitive matchmaking environments across all core titles.</p>
+<div class="mt-6 pt-4 border-t border-surface-container-highest flex justify-between items-center text-secondary font-label-md text-label-md">
+<span>EARNED: AUG 2023</span>
+<span class="text-primary font-bold">+150 REP</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-surface-container-low w-full mt-lg border-t border-outline-variant/30">
+<div class="flex flex-col md:flex-row justify-between items-center max-w-[1280px] mx-auto px-margin-desktop py-md gap-md">
+<div class="font-headline-md text-headline-md text-on-surface font-semibold">MASSUM67</div>
+<div class="flex space-x-md">
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Privacy Policy</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Terms of Service</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Discord</a>
+<a class="font-label-sm text-label-sm text-secondary hover:text-primary transition-colors opacity-80 hover:opacity-100" href="#">Instagram</a>
+</div>
+<div class="font-label-sm text-label-sm text-secondary">
+            © 2024 MASSUM67 Guild. All rights reserved.
+        </div>
+</div>
+</footer>
+</body></html>

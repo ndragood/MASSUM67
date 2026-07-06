@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MASSUM67</title>
+  <meta name="description"
+    content="MASSUM67 — Komunitas nongkrong sejak 2019. Tempat kumpul, cerita, dan bikin kenangan bareng." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&display=swap"
+    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./styles.css?v=8" />
+</head>
+
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <div class="navbar__logo">MASSUM67</div>
+      <div class="navbar__links">
+        <a class="navbar__link active" data-nav="home" href="#home">Home</a>
+        <a class="navbar__link" data-nav="roster" href="#roster">Members</a>
+        <a class="navbar__link" data-nav="about" href="#about">About</a>
+        <a class="navbar__link" data-nav="gallery" href="#gallery">Gallery</a>
+      </div>
+      <div class="navbar__actions" style="display:flex; align-items:center; gap:var(--space-md);">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"
+          style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:var(--surface-container-high); color:var(--on-surface);">
+          <span class="material-symbols-outlined theme-icon">dark_mode</span>
+        </button>
+        <button class="navbar__mobile-toggle">
+          <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <div class="mobile-menu__overlay" id="mobile-overlay"></div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__header">
+      <span class="navbar__logo">MASSUM67</span>
+      <div style="display:flex; align-items:center; gap:var(--space-sm);">
+        <button class="theme-toggle" id="theme-toggle-mobile" aria-label="Toggle Dark Mode"
+          style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:var(--surface-container-high); color:var(--on-surface);">
+          <span class="material-symbols-outlined theme-icon">dark_mode</span>
+        </button>
+        <button class="mobile-menu__close">
+          <span class="material-symbols-outlined" style="font-size:28px;">close</span>
+        </button>
+      </div>
+    </div>
+    <a class="mobile-menu__link active" data-mobile-nav="home" href="#home">Home</a>
+    <a class="mobile-menu__link" data-mobile-nav="roster" href="#roster">Members</a>
+    <a class="mobile-menu__link" data-mobile-nav="about" href="#about">About</a>
+    <a class="mobile-menu__link" data-mobile-nav="gallery" href="#gallery">Gallery</a>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- PAGE: HOME                                                    -->
+  <!-- ============================================================ -->
+  <main id="page-home" class="page active">
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero__bg">
+        <div class="hero__bg-image"
+          style="background-image:url('https://lh3.googleusercontent.com/aida-public/AB6AXuAYxzrvVS35uYdOYICEMbETGV5Ks4eMLMJU5cRWDZ5sFqG4NGEc8V-_LAAP21Xrw_UNOvQ7lowCrxg7EYZBcMmxpcJmLDZj8XI8Nt64FvDQ8YeqepYctAkuUB8hleqjYQZkxXC89M0pyWQJcTMJdVCRn8UqyC8_gTjVi0AFjRBChNzjZ3N9H0KHBw_aIAGks7mqc8n_eRjPDPYS6AjLyVtyYbCO5YCVH8YX229oxraDPUBpYK4hFxM')">
+        </div>
+        <div class="hero__bg-gradient"></div>
+      </div>
+      <div class="hero__content">
+        <img src="./public/logo.jpeg" alt="MASSUM67 Logo" class="hero__logo" />
+        <h1 class="hero__title headline-lg-mobile" id="hero-title-mobile">Berteman Dengan Siapa Saja</h1>
+        <p class="hero__subtitle body-lg">
+          We are MASSUM67. A circle of friends who believe that the best moments are shared ones. Laughter, stories, and
+          memories — that's what we're about.
+        </p>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats container">
+      <div class="stats__grid" style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+        <div class="organic-card stat-card reveal">
+          <span class="material-symbols-outlined filled stat-card__icon">group</span>
+          <h3 class="stat-card__value headline-lg-mobile">15</h3>
+          <span class="stat-card__label label-md">Active Members</span>
+        </div>
+        <div class="organic-card stat-card reveal">
+          <span class="material-symbols-outlined filled stat-card__icon">schedule</span>
+          <h3 class="stat-card__value headline-lg-mobile">1 YRS</h3>
+          <span class="stat-card__label label-md">Still Going Strong</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Latest Updates -->
+    <section class="news container">
+      <h2 class="section-title headline-lg">What's Happening</h2>
+      <div class="news__grid">
+        <!-- News 1 -->
+        <article class="organic-card news-card reveal">
+          <div class="news-card__image-wrap">
+            <img class="news-card__image" alt="Mini soccer MASSUM67" src="./public/minsoc1.jpeg" />
+          </div>
+          <div class="news-card__body">
+            <div>
+              <span class="news-card__tag label-sm">Olahraga</span>
+              <h3 class="news-card__title headline-md">Mini Soccer Rutin: MASSUM67 F.C. Beraksi</h3>
+              <p class="news-card__excerpt body-md">Biar badan tetap bugar, kita sering main mini soccer bareng.
+                Keringetan bareng, ketawa bareng, kadang serius kadang ngelawak di lapangan!</p>
+            </div>
+            <div class="news-card__footer">
+              <span class="news-card__date label-sm">[ 02.14.2024 ]</span>
+              <button class="news-card__arrow">
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </article>
+        <!-- News 2 -->
+        <article class="organic-card news-card reveal">
+          <div class="news-card__image-wrap">
+            <img class="news-card__image" alt="Kopdar MASSUM67" src="./public/kopdar.jpeg" />
+          </div>
+          <div class="news-card__body">
+            <div>
+              <span class="news-card__tag label-sm">Hangout</span>
+              <h3 class="news-card__title headline-md">Kopdar Asik: Temu Kangen dan Cerita Seru</h3>
+              <p class="news-card__excerpt body-md">Momen ngumpul dan berbagi cerita. Es kopi, obrolan santai, dan
+                suasana kebersamaan yang bikin betah sampai larut malam.</p>
+            </div>
+            <div class="news-card__footer">
+              <span class="news-card__date label-sm">[ 02.10.2024 ]</span>
+              <button class="news-card__arrow">
+                <span class="material-symbols-outlined">arrow_forward</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+
+  <!-- ============================================================ -->
+  <!-- PAGE: MEMBERS (ROSTER)                                        -->
+  <!-- ============================================================ -->
+  <main id="page-roster" class="page">
+    <div class="container" style="padding-top:var(--space-xl);padding-bottom:var(--space-xl);">
+
+      <header class="roster-header">
+        <h1 class="roster-header__title headline-xl">The Crew</h1>
+        <p class="roster-header__subtitle body-lg">MASSUM67 Squad — 14 Members Active</p>
+      </header>
+
+      <!-- Filters -->
+      <div class="filters">
+        <button class="filter-btn active" data-role-filter="all">All Members</button>
+        <button class="filter-btn" data-role-filter="founder">Founders</button>
+        <button class="filter-btn" data-role-filter="core">Core Crew</button>
+        <button class="filter-btn" data-role-filter="new">New Faces</button>
+        <div class="filters__divider"></div>
+        <button class="filter-btn active" data-rank-filter="all">All Vibes</button>
+        <button class="filter-btn" data-rank-filter="og">OG</button>
+        <button class="filter-btn" data-rank-filter="regular">Regular</button>
+        <button class="filter-btn" data-rank-filter="recruit">Recruit</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="roster__grid">
+        <div class="organic-card member-card" data-member data-role="founder" data-rank="og">
+          <div class="member-card__image-wrapper">
+            <img alt="Andra avatar" src="./member/andra.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">star</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Andra</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">OG / Founder</span><br />
+              <span class="member-card__role body-md">The Planner</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="og">
+          <div class="member-card__image-wrapper">
+            <img alt="Yoel avatar" src="./member/yoel.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">local_fire_department</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Yoel</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">OG / Core Crew</span><br />
+              <span class="member-card__role body-md">The Hype Man</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Arkan avatar" src="./member/arkan.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">favorite</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Arkan</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Listener</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="og">
+          <div class="member-card__image-wrapper">
+            <img alt="Janata avatar" src="./member/janata.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">directions_car</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Janata</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">OG / Core Crew</span><br />
+              <span class="member-card__role body-md">The Driver</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="new" data-rank="recruit">
+          <div class="member-card__image-wrapper">
+            <img alt="Arvandra avatar" src="./member/arvandra.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">emoji_nature</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Arvandra</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Recruit</span><br />
+              <span class="member-card__role body-md">The New Kid</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Jirjiz avatar" src="./member/jirjiz.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">restaurant</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Jirjiz</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Foodie</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="founder" data-rank="og">
+          <div class="member-card__image-wrapper">
+            <img alt="Billy avatar" src="./member/billy.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">star</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Billy</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">OG / Founder</span><br />
+              <span class="member-card__role body-md">The Boss</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Ilham avatar" src="./member/ilham.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">star</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Ilham</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Chill One</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Riko avatar" src="./member/riko.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">sentiment_very_satisfied</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Riko</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Comedian</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="founder" data-rank="og">
+          <div class="member-card__image-wrapper">
+            <img alt="Rafi avatar" src="./member/rafi.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">local_fire_department</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Rafi</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">OG / Founder</span><br />
+              <span class="member-card__role body-md">The Hype Man</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Rafa avatar" src="./member/rafa.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">sports_esports</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Rafa</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Gamer</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="new" data-rank="recruit">
+          <div class="member-card__image-wrapper">
+            <img alt="Sam avatar" src="./member/sam.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">music_note</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Sam</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Recruit</span><br />
+              <span class="member-card__role body-md">The Musician</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Satria avatar" src="./member/satria.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">sports_basketball</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Satria</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Athlete</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="organic-card member-card" data-member data-role="core" data-rank="regular">
+          <div class="member-card__image-wrapper">
+            <img alt="Khiro avatar" src="./member/khiro.jpeg" />
+            <div class="member-card__overlay"></div>
+            <span class="material-symbols-outlined filled member-card__role-icon">explore</span>
+          </div>
+          <div class="member-card__info">
+            <div class="member-card__top">
+              <h3 class="member-card__name">Khiro</h3>
+            </div>
+            <div>
+              <span class="member-card__rank label-md">Regular / Core Crew</span><br />
+              <span class="member-card__role body-md">The Explorer</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <!-- ============================================================ -->
+  <!-- PAGE: ABOUT                                                   -->
+  <!-- ============================================================ -->
+  <main id="page-about" class="page">
+    <div class="container" style="padding-top:var(--space-lg);padding-bottom:var(--space-xl);">
+
+      <!-- Hero -->
+      <header class="about-hero">
+        <div style="max-width:720px;">
+          <h1 class="about-hero__title headline-xl">Built on Friendship.</h1>
+          <p class="about-hero__text body-lg">
+            MASSUM67 is more than a group chat; it's a family we chose. We look out for each other, show up when it
+            matters, and make every hangout count. No drama, just genuine connection.
+          </p>
+        </div>
+      </header>
+
+      <!-- Mission + Image -->
+      <div class="mission reveal">
+        <div class="mission__card">
+          <div>
+            <div class="mission__header">
+              <span class="material-symbols-outlined">psychiatry</span>
+              <h2 class="headline-lg">Our Manifesto</h2>
+            </div>
+            <p class="mission__text body-md">
+              To keep this circle real and tight-knit. We don't do fake vibes here. Whether it's a midnight food run, a
+              weekend road trip, or just chilling at the usual spot — we show up for each other. We grow together, laugh
+              together, and have each other's backs through thick and thin.
+            </p>
+          </div>
+          <div class="mission__status">
+            <span class="mission__status-label label-sm">SQUAD STATUS</span>
+            <span class="mission__status-value label-md">
+              <span class="mission__status-dot"></span> ACTIVE // ALWAYS VIBING
+            </span>
+          </div>
+        </div>
+        <div class="mission__image">
+          <img alt="MASSUM67 gathering" src="public/minsoc2.jpeg" />
+        </div>
+      </div>
+
+      <!-- Crew Values -->
+      <div class="values reveal">
+        <h2 class="values__title headline-lg">
+          <span class="material-symbols-outlined filled">eco</span>
+          Crew Values
+        </h2>
+        <div class="values__grid">
+          <div class="value-card">
+            <span class="material-symbols-outlined value-card__icon">handshake</span>
+            <h3 class="value-card__title">Saling Menasihati</h3>
+            <p class="value-card__text">Kita Saling Menasihati Teman Kita Yang Keterlaluan Kepada Orang Tua nya.</p>
+          </div>
+          <div class="value-card">
+            <span class="material-symbols-outlined value-card__icon">diversity_3</span>
+            <h3 class="value-card__title">Saling Support</h3>
+            <p class="value-card__text">Saling Support Pangan Papan Yang Lagi Dilanda Beak Duit.</p>
+          </div>
+          <div class="value-card">
+            <span class="material-symbols-outlined value-card__icon">nightlife</span>
+            <h3 class="value-card__title">Tidak Akan Bosan</h3>
+            <p class="value-card__text">Kita Mempunyai Duo Monyet Yang Akan Menghibur Kita Semua.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heritage Timeline -->
+      <section class="heritage reveal">
+        <h2 class="heritage__title headline-lg">Our Story</h2>
+        <div class="timeline">
+          <div class="timeline__event">
+            <div class="timeline__dot"></div>
+            <span class="timeline__phase label-sm">2025 DECEMBER - THE BEGINNING</span>
+            <h3 class="timeline__event-title">The First Hangout</h3>
+            <p class="timeline__event-text body-md">
+              Ini semua dimulai dari kumpulan pertemanan dari masa kecil.
+            </p>
+          </div>
+          <div class="timeline__event">
+            <div class="timeline__dot"></div>
+            <span class="timeline__phase label-sm">2026</span>
+            <h3 class="timeline__event-title">The Crew Expands</h3>
+            <p class="timeline__event-text body-md">
+              Lalu Arkan melakukan penambahan member yang berasal dari temen SMP nya.
+            </p>
+          </div>
+          <div class="timeline__event">
+            <div class="timeline__dot filled"></div>
+            <span class="timeline__phase current label-sm">NOW</span>
+            <h3 class="timeline__event-title">The Golden Era</h3>
+            <p class="timeline__event-text body-md">
+              Dan sekarang member tetap hanya segini
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+
+  <!-- ============================================================ -->
+  <!-- PAGE: GALLERY                                                 -->
+  <!-- ============================================================ -->
+  <main id="page-gallery" class="page">
+    <div class="container" style="padding-top:var(--space-xl);padding-bottom:var(--space-xl);">
+
+      <header class="gallery-header">
+        <h1 class="gallery-header__title headline-xl">MOMENTS &amp; MEMORIES</h1>
+        <p class="gallery-header__text body-lg">The photo dump. From late-night food runs to epic road trips — these are
+          the moments that made us, us.</p>
+      </header>
+
+      <!-- Gallery Grid -->
+      <section class="gallery-section">
+        <div class="gallery-section__header">
+          <h2 class="gallery-section__title headline-md">
+            <span class="material-symbols-outlined">photo_library</span>
+            Photo Archive
+          </h2>
+          <div class="gallery-filters">
+            <button class="gallery-filter-btn active label-md" data-gallery-filter="all">ALL</button>
+            <button class="gallery-filter-btn label-md" data-gallery-filter="hangout">HANGOUTS</button>
+            <button class="gallery-filter-btn label-md" data-gallery-filter="trip">TRIPS</button>
+          </div>
+        </div>
+        <div class="masonry">
+          <div class="masonry-item" data-gallery-item="hangout">
+            <img alt="Crew chilling at the usual spot"
+              src="./public/minsoc1.jpeg" />
+            <div class="masonry-item__overlay">
+              <span class="masonry-item__label label-md">FRIDAY NIGHT VIBES</span>
+            </div>
+          </div>
+          <div class="masonry-item" data-gallery-item="trip">
+            <img alt="Road trip scenery"
+              src="./public/minsoc2.jpeg" />
+            <div class="masonry-item__overlay">
+              <span class="masonry-item__label label-md">MOUNTAIN GETAWAY 2024</span>
+            </div>
+          </div>
+          <div class="masonry-item" data-gallery-item="hangout">
+            <img alt="Birthday celebration"
+              src="./public/futsalold.jpeg" />
+            <div class="masonry-item__overlay">
+              <span class="masonry-item__label label-md">BIRTHDAY BASH 🎂</span>
+            </div>
+          </div>
+          <div class="masonry-item" data-gallery-item="trip">
+            <img alt="Late night food run"
+              src="./public/aeon.jpeg" />
+            <div class="masonry-item__overlay">
+              <span class="masonry-item__label label-md">MIDNIGHT FOOD RUN 🍜</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+  </main>
+
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__logo">MASSUM67</div>
+      <div class="footer__copyright label-sm">© 2024 MASSUM67 Crew. All vibes reserved.</div>
+      <div class="footer__links label-sm">
+        <a class="footer__link" href="#">Instagram</a>
+        <a class="footer__link" href="#">TikTok</a>
+        <a class="footer__link" href="#">WhatsApp Group</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="./app.js"></script>
+</body>
+
+</html>
