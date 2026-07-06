@@ -239,88 +239,175 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ===== UPLOAD MODAL LOGIC =====
+// ===== UPLOAD MODAL LOGIC (Redesigned 2-Step) =====
 document.addEventListener('DOMContentLoaded', () => {
   const modal = document.getElementById('upload-modal');
   const btnOpen = document.getElementById('open-upload-modal');
   const btnClose = document.getElementById('upload-modal-close');
   const btnCancel = document.getElementById('upload-modal-cancel');
   const overlay = document.getElementById('upload-modal-overlay');
-  
+
+  const step1 = document.getElementById('upload-step-1');
+  const step2 = document.getElementById('upload-step-2');
+  const btnNext = document.getElementById('upload-next');
+  const btnBack = document.getElementById('upload-back');
+  const btnSubmit = document.getElementById('upload-modal-submit');
+  const progressDots = document.querySelectorAll('.upload-progress__dot');
+
   const uploadArea = document.getElementById('upload-area');
   const uploadInput = document.getElementById('upload-input');
   const uploadPreview = document.getElementById('upload-preview');
+  const uploadPreviewWrap = document.getElementById('upload-preview-wrap');
   const uploadPlaceholder = document.getElementById('upload-placeholder');
-  const btnSubmit = document.getElementById('upload-modal-submit');
+  const uploadRemove = document.getElementById('upload-remove');
 
-  function openModal() { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
-  function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; resetForm(); }
+  const titleInput = document.getElementById('upload-title');
+  const charCount = document.getElementById('upload-char-count');
+  const catBtns = document.querySelectorAll('.upload-cat-btn');
 
-  if(btnOpen) btnOpen.addEventListener('click', openModal);
-  if(btnClose) btnClose.addEventListener('click', closeModal);
-  if(btnCancel) btnCancel.addEventListener('click', closeModal);
-  if(overlay) overlay.addEventListener('click', closeModal);
+  let selectedCategory = 'hangout';
 
-  // File Input Logic
-  if(uploadArea) {
-    uploadArea.addEventListener('click', () => uploadInput.click());
-    
-    // Drag & Drop
+  function openModal() {
+    if (!modal) return;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    goToStep(1);
+  }
+
+  function closeModal() {
+    if (!modal) return;
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+    resetForm();
+  }
+
+  function goToStep(n) {
+    if (n === 1) {
+      step1.style.display = '';
+      step2.style.display = 'none';
+      btnNext.style.display = '';
+      btnBack.style.display = 'none';
+      btnSubmit.style.display = 'none';
+    } else {
+      step1.style.display = 'none';
+      step2.style.display = '';
+      btnNext.style.display = 'none';
+      btnBack.style.display = '';
+      btnSubmit.style.display = '';
+    }
+    progressDots.forEach(d => {
+      d.classList.toggle('active', parseInt(d.dataset.step) === n);
+    });
+  }
+
+  // Open / Close
+  if (btnOpen) btnOpen.addEventListener('click', openModal);
+  if (btnClose) btnClose.addEventListener('click', closeModal);
+  if (btnCancel) btnCancel.addEventListener('click', closeModal);
+  if (overlay) overlay.addEventListener('click', closeModal);
+
+  // Step navigation
+  if (btnNext) btnNext.addEventListener('click', () => goToStep(2));
+  if (btnBack) btnBack.addEventListener('click', () => goToStep(1));
+
+  // File selection
+  if (uploadArea) {
+    uploadArea.addEventListener('click', (e) => {
+      if (e.target.closest('.upload-dropzone__remove')) return;
+      uploadInput.click();
+    });
+
     uploadArea.addEventListener('dragover', (e) => {
       e.preventDefault();
-      uploadArea.style.borderColor = 'var(--primary)';
+      uploadArea.classList.add('drag-over');
     });
     uploadArea.addEventListener('dragleave', () => {
-      uploadArea.style.borderColor = '';
+      uploadArea.classList.remove('drag-over');
     });
     uploadArea.addEventListener('drop', (e) => {
       e.preventDefault();
-      uploadArea.style.borderColor = '';
-      if(e.dataTransfer.files.length > 0) {
+      uploadArea.classList.remove('drag-over');
+      if (e.dataTransfer.files.length > 0) {
         uploadInput.files = e.dataTransfer.files;
         handleFile(e.dataTransfer.files[0]);
       }
     });
   }
 
-  if(uploadInput) {
-    uploadInput.addEventListener('change', function() {
-      if(this.files && this.files[0]) handleFile(this.files[0]);
+  if (uploadInput) {
+    uploadInput.addEventListener('change', function () {
+      if (this.files && this.files[0]) handleFile(this.files[0]);
     });
   }
 
   function handleFile(file) {
-    if(!file.type.startsWith('image/')) return alert('Please select an image file!');
+    if (!file.type.startsWith('image/')) return alert('Pilih file gambar ya bro!');
+    if (file.size > 5 * 1024 * 1024) return alert('File terlalu besar! Maksimal 5MB.');
     const reader = new FileReader();
     reader.onload = (e) => {
       uploadPreview.src = e.target.result;
-      uploadPreview.style.display = 'block';
+      uploadPreviewWrap.style.display = '';
       uploadPlaceholder.style.display = 'none';
+      btnNext.disabled = false;
     };
     reader.readAsDataURL(file);
   }
 
-  function resetForm() {
-    uploadInput.value = '';
-    uploadPreview.src = '';
-    uploadPreview.style.display = 'none';
-    uploadPlaceholder.style.display = 'block';
-    document.getElementById('upload-title').value = '';
+  // Remove photo
+  if (uploadRemove) {
+    uploadRemove.addEventListener('click', (e) => {
+      e.stopPropagation();
+      uploadInput.value = '';
+      uploadPreview.src = '';
+      uploadPreviewWrap.style.display = 'none';
+      uploadPlaceholder.style.display = '';
+      btnNext.disabled = true;
+    });
   }
 
-  if(btnSubmit) {
+  // Character counter
+  if (titleInput) {
+    titleInput.addEventListener('input', () => {
+      charCount.textContent = titleInput.value.length + ' / 60';
+    });
+  }
+
+  // Category picker
+  catBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      catBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      selectedCategory = btn.dataset.cat;
+    });
+  });
+
+  // Submit
+  if (btnSubmit) {
     btnSubmit.addEventListener('click', () => {
-      if(!uploadInput.files.length) return alert('Pilih foto dulu bro!');
-      
-      // Simulate upload
-      btnSubmit.textContent = 'Uploading...';
+      if (!uploadInput.files.length) return alert('Pilih foto dulu bro!');
+
+      btnSubmit.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;animation:spin 1s linear infinite;">progress_activity</span> Uploading...';
       btnSubmit.disabled = true;
+
       setTimeout(() => {
-        alert('Fitur Upload belum tersambung ke Database! Ini baru tampilannya saja.');
-        btnSubmit.textContent = 'Upload Now';
+        alert('Fitur Upload belum tersambung ke Database! Ini baru tampilannya saja. Nanti kita sambungkan ke Firebase.');
+        btnSubmit.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">cloud_upload</span> Upload Now';
         btnSubmit.disabled = false;
         closeModal();
-      }, 1000);
+      }, 1500);
     });
+  }
+
+  function resetForm() {
+    if (uploadInput) uploadInput.value = '';
+    if (uploadPreview) uploadPreview.src = '';
+    if (uploadPreviewWrap) uploadPreviewWrap.style.display = 'none';
+    if (uploadPlaceholder) uploadPlaceholder.style.display = '';
+    if (titleInput) titleInput.value = '';
+    if (charCount) charCount.textContent = '0 / 60';
+    if (btnNext) btnNext.disabled = true;
+    catBtns.forEach(b => b.classList.remove('active'));
+    if (catBtns[0]) catBtns[0].classList.add('active');
+    selectedCategory = 'hangout';
   }
 });
