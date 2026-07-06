@@ -48,7 +48,10 @@
           </button>
 
           <!-- Dropdown -->
-          <div id="nav-profile-dropdown" style="display:none; position:absolute; top:calc(100% + 8px); right:0; background:var(--surface); border:1px solid var(--outline-variant); border-radius:12px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); z-index:100; min-width:140px;">
+          <div id="nav-profile-dropdown" style="display:none; position:absolute; top:calc(100% + 8px); right:0; background:var(--surface); border:1px solid var(--outline-variant); border-radius:12px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); z-index:100; min-width:160px;">
+            <button id="nav-admin-dashboard-btn" style="display:none; width:100%; align-items:center; gap:8px; padding:8px 12px; background:none; border:none; color:var(--on-surface); cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; border-radius:8px; transition:background 0.2s; margin-bottom:4px;">
+              <span class="material-symbols-outlined" style="font-size:18px;">admin_panel_settings</span> Dashboard Admin
+            </button>
             <button id="nav-logout-btn" style="width:100%; display:flex; align-items:center; gap:8px; padding:8px 12px; background:none; border:none; color:#c62828; cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; border-radius:8px; transition:background 0.2s;">
               <span class="material-symbols-outlined" style="font-size:18px;">logout</span> Logout
             </button>
@@ -557,7 +560,7 @@
             <button class="gallery-filter-btn active label-md" data-gallery-filter="all">ALL</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="hangout">HANGOUTS</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="trip">TRIPS</button>
-            <button id="open-upload-modal" class="organic-btn label-md" style="margin-left: auto; display:flex; align-items:center; gap:4px; padding:8px 16px; background:var(--primary); color:var(--on-primary); border-radius:var(--radius-full); border:none; cursor:pointer; font-family:inherit; font-weight:600;">
+            <button id="open-upload-modal" class="upload-btn upload-btn--primary" style="display:none; margin-left:auto; padding:6px 16px; border-radius:var(--radius-full); border:none; cursor:pointer; font-family:inherit; font-weight:600;">
               <span class="material-symbols-outlined" style="font-size:18px;">cloud_upload</span> UPLOAD
             </button>
           </div>
@@ -608,6 +611,38 @@
     </div>
   </footer>
 
+
+  <!-- ===== ADMIN DASHBOARD MODAL ===== -->
+  <div class="upload-modal" id="admin-modal">
+    <div class="upload-modal__overlay" id="admin-modal-overlay"></div>
+    <div class="upload-modal__content" style="max-width:600px; padding:32px;">
+      <button class="upload-modal__close" id="admin-modal-close">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+
+      <div class="upload-modal__icon-wrap">
+        <span class="material-symbols-outlined">admin_panel_settings</span>
+      </div>
+      <h2 class="upload-modal__title headline-md">Dashboard Admin</h2>
+      <p class="upload-modal__desc body-md">Atur role member di sini.</p>
+
+      <div style="margin-top:24px; max-height:400px; overflow-y:auto; border:1px solid var(--outline-variant); border-radius:12px; padding:12px;">
+        <table style="width:100%; text-align:left; border-collapse:collapse;">
+          <thead>
+            <tr style="border-bottom:1px solid var(--outline-variant);">
+              <th style="padding:8px; font-size:14px; color:var(--on-surface-variant);">Nama</th>
+              <th style="padding:8px; font-size:14px; color:var(--on-surface-variant);">Email</th>
+              <th style="padding:8px; font-size:14px; color:var(--on-surface-variant);">Role</th>
+              <th style="padding:8px; font-size:14px; color:var(--on-surface-variant);">Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="admin-user-list">
+            <!-- User rows injected by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 
   <!-- ===== UPLOAD MODAL ===== -->
   <div class="upload-modal" id="upload-modal">

@@ -63,6 +63,105 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // === Admin Dashboard Logic ===
+  const adminModal = document.getElementById('admin-modal');
+  const adminModalClose = document.getElementById('admin-modal-close');
+  const adminModalOverlay = document.getElementById('admin-modal-overlay');
+  const adminUserList = document.getElementById('admin-user-list');
+
+  function closeAdminModal() {
+    if (adminModal) adminModal.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  if (adminModalClose) adminModalClose.addEventListener('click', closeAdminModal);
+  if (adminModalOverlay) adminModalOverlay.addEventListener('click', closeAdminModal);
+
+  async function openAdminDashboard() {
+    if (adminModal) {
+      adminModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      navProfileDropdown.style.display = 'none';
+      
+      if (adminUserList) {
+        adminUserList.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:16px;">Memuat data...</td></tr>';
+        
+        try {
+          const snapshot = await db.collection('users').get();
+          adminUserList.innerHTML = '';
+          
+          snapshot.forEach(doc => {
+            const data = doc.data();
+            const uid = doc.id;
+            
+            const tr = document.createElement('tr');
+            tr.style.borderBottom = '1px solid var(--outline-variant)';
+            
+            // Only allow changing if not super admin
+            const isSuper = data.role === 'super_admin';
+            let roleSelect = '';
+            
+            if (isSuper) {
+              roleSelect = `<span class="label-sm" style="color:var(--primary); font-weight:700;">SUPER ADMIN</span>`;
+            } else {
+              roleSelect = `
+                <select class="role-select body-sm" data-uid="${uid}" style="padding:4px 8px; border-radius:4px; border:1px solid var(--outline-variant); background:var(--surface);">
+                  <option value="member" ${data.role === 'member' ? 'selected' : ''}>Member</option>
+                  <option value="admin" ${data.role === 'admin' ? 'selected' : ''}>Admin</option>
+                </select>
+              `;
+            }
+
+            tr.innerHTML = `
+              <td style="padding:8px; font-size:14px; font-weight:600;">${data.name || '-'}</td>
+              <td style="padding:8px; font-size:14px;">${data.email || '-'}</td>
+              <td style="padding:8px; font-size:14px;">${roleSelect}</td>
+              <td style="padding:8px; font-size:14px;">
+                ${!isSuper ? `<button class="update-role-btn label-sm" data-uid="${uid}" style="padding:4px 12px; background:var(--primary); color:var(--on-primary); border:none; border-radius:4px; cursor:pointer;">Update</button>` : ''}
+              </td>
+            `;
+            
+            adminUserList.appendChild(tr);
+          });
+          
+          // Attach update events
+          document.querySelectorAll('.update-role-btn').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+              const uid = e.target.getAttribute('data-uid');
+              const select = document.querySelector(`.role-select[data-uid="${uid}"]`);
+              const newRole = select.value;
+              
+              const originalText = e.target.textContent;
+              e.target.textContent = 'Updating...';
+              e.target.disabled = true;
+              
+              try {
+                await db.collection('users').doc(uid).update({ role: newRole });
+                alert('Role berhasil diupdate!');
+              } catch (err) {
+                console.error("Error updating role:", err);
+                alert("Gagal update role: " + err.message);
+              } finally {
+                e.target.textContent = originalText;
+                e.target.disabled = false;
+              }
+            });
+          });
+
+        } catch (err) {
+          console.error("Error loading users:", err);
+          adminUserList.innerHTML = '<tr><td colspan="4" style="text-align:center; padding:16px; color:red;">Gagal memuat data</td></tr>';
+        }
+      }
+    }
+  }
+
+  // Bind Dashboard button if exists
+  const navAdminBtn = document.getElementById('nav-admin-dashboard-btn');
+  if (navAdminBtn) {
+    navAdminBtn.addEventListener('click', openAdminDashboard);
+  }
+
   if (navLogoutBtn) {
     navLogoutBtn.addEventListener('click', async () => {
       try {
@@ -77,8 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Auth State ===
   if (typeof auth !== 'undefined') {
-    auth.onAuthStateChanged(user => {
+    auth.onAuthStateChanged(async (user) => {
       currentUser = user;
+      const openUploadBtn = document.getElementById('open-upload-modal');
+      const navAdminBtn = document.getElementById('nav-admin-dashboard-btn');
       
       // Update Navbar
       if (user) {
@@ -88,10 +189,56 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = user.displayName || user.email.split('@')[0] || 'User';
         if (navUserName) navUserName.textContent = name;
         if (navUserAvatar) navUserAvatar.textContent = name.charAt(0).toUpperCase();
+
+        // Check Role in Firestore
+        try {
+          const docRef = db.collection('users').doc(user.uid);
+          let docSnap = await docRef.get();
+          
+          let role = 'member';
+          if (docSnap.exists) {
+            role = docSnap.data().role || 'member';
+          } else {
+            // Document doesn't exist (maybe created from console), create it
+            await docRef.set({ name: name, email: user.email, role: 'member' });
+          }
+
+          // Super Admin Hardcode Override
+          if (user.email === 'bukabukagame456@gmail.com' && role !== 'super_admin') {
+            await docRef.update({ role: 'super_admin' });
+            role = 'super_admin';
+          }
+
+          user.role = role; // attach role to currentUser object
+
+          // Toggle Upload Button Visibility
+          if (openUploadBtn) {
+            if (role === 'admin' || role === 'super_admin') {
+              openUploadBtn.style.display = 'flex';
+            } else {
+              openUploadBtn.style.display = 'none';
+            }
+          }
+
+          // Toggle Admin Dashboard Button Visibility
+          if (navAdminBtn) {
+            if (role === 'super_admin') {
+              navAdminBtn.style.display = 'flex';
+            } else {
+              navAdminBtn.style.display = 'none';
+            }
+          }
+
+        } catch (err) {
+          console.error("Error fetching user role:", err);
+        }
+
       } else {
         if (navLoginBtn) navLoginBtn.style.display = 'flex';
         if (navUserBtn) navUserBtn.style.display = 'none';
         if (navProfileDropdown) navProfileDropdown.style.display = 'none';
+        if (openUploadBtn) openUploadBtn.style.display = 'none';
+        if (navAdminBtn) navAdminBtn.style.display = 'none';
       }
     });
   }
@@ -173,9 +320,18 @@ document.addEventListener('DOMContentLoaded', () => {
         registerBtn.disabled = true;
 
         const userCredential = await auth.createUserWithEmailAndPassword(email, password);
-        await userCredential.user.updateProfile({ displayName: name });
+        const user = userCredential.user;
+        await user.updateProfile({ displayName: name });
         
-        currentUser = auth.currentUser;
+        // Save user role to Firestore (Default: member)
+        await db.collection('users').doc(user.uid).set({
+          name: name,
+          email: email,
+          role: 'member',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+
+        currentUser = user;
         showState(formState);
       } catch (err) {
         console.error('Register error:', err);
