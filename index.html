@@ -532,10 +532,13 @@
             <span class="material-symbols-outlined">photo_library</span>
             Photo Archive
           </h2>
-          <div class="gallery-filters">
+          <div class="gallery-filters" style="display:flex; align-items:center; gap:var(--space-sm); flex-wrap:wrap;">
             <button class="gallery-filter-btn active label-md" data-gallery-filter="all">ALL</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="hangout">HANGOUTS</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="trip">TRIPS</button>
+            <button id="open-upload-modal" class="organic-btn label-md" style="margin-left: auto; display:flex; align-items:center; gap:4px; padding:8px 16px; background:var(--primary); color:var(--on-primary); border-radius:var(--radius-full); border:none; cursor:pointer; font-family:inherit; font-weight:600;">
+              <span class="material-symbols-outlined" style="font-size:18px;">cloud_upload</span> UPLOAD
+            </button>
           </div>
         </div>
         <div class="masonry">
