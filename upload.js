@@ -198,14 +198,11 @@ document.addEventListener('DOMContentLoaded', () => {
           let role = 'member';
           if (docSnap.exists) {
             role = docSnap.data().role || 'member';
-          } else {
-            // Document doesn't exist (maybe created from console), create it
-            await docRef.set({ name: name, email: user.email, role: 'member' });
           }
 
           // Super Admin Hardcode Override
           if (user.email === 'bukabukagame456@gmail.com' && role !== 'super_admin') {
-            await docRef.update({ role: 'super_admin' });
+            await docRef.set({ role: 'super_admin', name: name, email: user.email }, { merge: true });
             role = 'super_admin';
           }
 
