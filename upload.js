@@ -10,10 +10,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const overlay = document.getElementById('upload-modal-overlay');
 
   const loginState = document.getElementById('upload-login-state');
+  const registerState = document.getElementById('upload-register-state');
   const formState = document.getElementById('upload-form-state');
   const progressState = document.getElementById('upload-progress-state');
   const successState = document.getElementById('upload-success-state');
   const progressText = document.getElementById('upload-progress-text');
+
+  const linkToRegister = document.getElementById('link-to-register');
+  const linkToLogin = document.getElementById('link-to-login');
 
   const loginBtn = document.getElementById('upload-login-btn');
   const cancelBtn = document.getElementById('upload-cancel');
@@ -41,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // === Modal States ===
   function showState(state) {
-    [loginState, formState, progressState, successState].forEach(s => {
+    [loginState, registerState, formState, progressState, successState].forEach(s => {
       if (s) s.style.display = 'none';
     });
     if (state) state.style.display = '';
@@ -65,6 +69,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (btnClose) btnClose.addEventListener('click', closeModal);
   if (overlay) overlay.addEventListener('click', closeModal);
   if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
+
+  if (linkToRegister) linkToRegister.addEventListener('click', (e) => { e.preventDefault(); showState(registerState); });
+  if (linkToLogin) linkToLogin.addEventListener('click', (e) => { e.preventDefault(); showState(loginState); });
 
   // === Email/Password Login ===
   if (loginBtn) {
@@ -97,11 +104,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const registerBtn = document.getElementById('upload-register-btn');
   if (registerBtn) {
     registerBtn.addEventListener('click', async () => {
-      const email = document.getElementById('login-email').value;
-      const password = document.getElementById('login-pass').value;
+      const name = document.getElementById('reg-name').value;
+      const email = document.getElementById('reg-email').value;
+      const password = document.getElementById('reg-pass').value;
 
-      if (!email || !password) {
-        return alert('Isi email dan password dulu ya bro untuk daftar!');
+      if (!name || !email || !password) {
+        return alert('Isi nama, email, dan password dulu ya bro untuk daftar!');
       }
       if (password.length < 6) {
         return alert('Password minimal 6 karakter bro!');
@@ -111,15 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
         registerBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;animation:spin 1s linear infinite;">progress_activity</span> Loading...';
         registerBtn.disabled = true;
 
-        await auth.createUserWithEmailAndPassword(email, password);
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        await userCredential.user.updateProfile({ displayName: name });
+        
         currentUser = auth.currentUser;
-        alert('Berhasil daftar & otomatis login!');
         showState(formState);
       } catch (err) {
         console.error('Register error:', err);
         alert('Daftar gagal: ' + err.message);
       } finally {
-        registerBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">person_add</span> Daftar Akun Baru';
+        registerBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">person_add</span> Daftar Sekarang';
         registerBtn.disabled = false;
       }
     });

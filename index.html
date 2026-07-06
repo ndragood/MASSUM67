@@ -602,25 +602,54 @@
           <span class="material-symbols-outlined">lock</span>
         </div>
         <h2 class="upload-modal__title headline-md">Login Dulu, Bro</h2>
-        <p class="upload-modal__desc body-md">Hanya member MASSUM67 yang bisa upload foto.</p>
+        <p class="upload-modal__desc body-md">Masuk untuk upload momen terbarumu.</p>
         
         <div class="upload-form-group" style="text-align:left;">
           <label class="label-sm" for="login-email">Email</label>
-          <input type="email" id="login-email" class="upload-input-field body-md" placeholder="Email member" />
+          <input type="email" id="login-email" class="upload-input-field body-md" placeholder="Email kamu" />
         </div>
         <div class="upload-form-group" style="text-align:left; margin-bottom:24px;">
           <label class="label-sm" for="login-pass">Password</label>
           <input type="password" id="login-pass" class="upload-input-field body-md" placeholder="Password rahasia" />
         </div>
 
-        <div style="display:flex; flex-direction:column; gap:8px;">
-          <button id="upload-login-btn" class="upload-btn upload-btn--primary" style="margin:0 auto; width:100%; justify-content:center;">
-            <span class="material-symbols-outlined" style="font-size:18px;">login</span> Masuk
-          </button>
-          <button id="upload-register-btn" class="upload-btn upload-btn--outline" style="margin:0 auto; width:100%; justify-content:center;">
-            <span class="material-symbols-outlined" style="font-size:18px;">person_add</span> Daftar Akun Baru
-          </button>
+        <button id="upload-login-btn" class="upload-btn upload-btn--primary" style="margin:0 auto; width:100%; justify-content:center;">
+          <span class="material-symbols-outlined" style="font-size:18px;">login</span> Masuk
+        </button>
+
+        <p class="body-md" style="margin-top:20px; color:var(--on-surface-variant);">
+          Belum punya akun? <a href="#" id="link-to-register" style="color:var(--primary); font-weight:600; text-decoration:none;">Daftar di sini</a>
+        </p>
+      </div>
+
+      <!-- Register State -->
+      <div id="upload-register-state" style="display:none;">
+        <div class="upload-modal__icon-wrap">
+          <span class="material-symbols-outlined">person_add</span>
         </div>
+        <h2 class="upload-modal__title headline-md">Daftar Akun Baru</h2>
+        <p class="upload-modal__desc body-md">Gabung ke MASSUM67 buat upload foto.</p>
+        
+        <div class="upload-form-group" style="text-align:left;">
+          <label class="label-sm" for="reg-name">Nama Panggilan</label>
+          <input type="text" id="reg-name" class="upload-input-field body-md" placeholder="Nama kamu" />
+        </div>
+        <div class="upload-form-group" style="text-align:left;">
+          <label class="label-sm" for="reg-email">Email</label>
+          <input type="email" id="reg-email" class="upload-input-field body-md" placeholder="Email aktif" />
+        </div>
+        <div class="upload-form-group" style="text-align:left; margin-bottom:24px;">
+          <label class="label-sm" for="reg-pass">Password</label>
+          <input type="password" id="reg-pass" class="upload-input-field body-md" placeholder="Minimal 6 karakter" />
+        </div>
+
+        <button id="upload-register-btn" class="upload-btn upload-btn--primary" style="margin:0 auto; width:100%; justify-content:center;">
+          <span class="material-symbols-outlined" style="font-size:18px;">person_add</span> Daftar Sekarang
+        </button>
+
+        <p class="body-md" style="margin-top:20px; color:var(--on-surface-variant);">
+          Sudah punya akun? <a href="#" id="link-to-login" style="color:var(--primary); font-weight:600; text-decoration:none;">Login di sini</a>
+        </p>
       </div>
 
       <!-- Upload Form State -->
