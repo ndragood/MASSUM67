@@ -212,8 +212,10 @@ document.addEventListener('DOMContentLoaded', () => {
           if (openUploadBtn) {
             if (role === 'admin' || role === 'super_admin') {
               openUploadBtn.style.display = 'flex';
+              document.body.classList.add('is-admin');
             } else {
               openUploadBtn.style.display = 'none';
+              document.body.classList.remove('is-admin');
             }
           }
 
@@ -236,6 +238,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navProfileDropdown) navProfileDropdown.style.display = 'none';
         if (openUploadBtn) openUploadBtn.style.display = 'none';
         if (navAdminBtn) navAdminBtn.style.display = 'none';
+        document.body.classList.remove('is-admin');
       }
     });
   }
@@ -506,6 +509,9 @@ document.addEventListener('DOMContentLoaded', () => {
         item.setAttribute('data-gallery-item', d.category || 'hangout');
         item.innerHTML = `
           <img alt="${d.caption || ''}" src="${d.imageUrl}" loading="lazy" />
+          <button class="delete-photo-btn" data-id="${doc.id}">
+            <span class="material-symbols-outlined" style="font-size:16px;">delete</span>
+          </button>
           <div class="masonry-item__overlay">
             <span class="masonry-item__label label-md">${(d.caption || '').toUpperCase()}</span>
           </div>
@@ -520,6 +526,41 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (err) {
       console.error('Load gallery error:', err);
     }
+  }
+
+  // Inject Delete Button Styles
+  const style = document.createElement('style');
+  style.innerHTML = `
+    .delete-photo-btn { display: none; position: absolute; top: 8px; right: 8px; background: rgba(220, 38, 38, 0.9); color: white; border: none; border-radius: 50%; width: 32px; height: 32px; cursor: pointer; z-index: 10; align-items: center; justify-content: center; backdrop-filter: blur(4px); transition: transform 0.2s; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+    .delete-photo-btn:hover { transform: scale(1.1); background: rgba(239, 68, 68, 1); }
+    body.is-admin .delete-photo-btn { display: flex; }
+  `;
+  document.head.appendChild(style);
+
+  // Delegated Event Listener for Delete
+  const masonryContainer = document.querySelector('#page-gallery .masonry');
+  if (masonryContainer) {
+    masonryContainer.addEventListener('click', async (e) => {
+      const btn = e.target.closest('.delete-photo-btn');
+      if (btn) {
+        e.stopPropagation();
+        const id = btn.getAttribute('data-id');
+        if (confirm("Yakin mau hapus foto ini dari gallery?")) {
+          btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;animation:spin 1s linear infinite;">progress_activity</span>';
+          try {
+            await db.collection('gallery').doc(id).delete();
+            const item = btn.closest('.masonry-item');
+            item.style.opacity = '0';
+            item.style.transform = 'scale(0.9)';
+            setTimeout(() => item.remove(), 300);
+          } catch (err) {
+            console.error('Gagal hapus foto:', err);
+            alert('Gagal menghapus foto: ' + err.message);
+            btn.innerHTML = '<span class="material-symbols-outlined" style="font-size:16px;">delete</span>';
+          }
+        }
+      }
+    });
   }
 
   loadGalleryFromFirestore();
