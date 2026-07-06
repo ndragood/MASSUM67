@@ -407,3 +407,5 @@ ul, ol { list-style:none; }
 .upload-btn--ghost:hover { background:var(--surface-container-high); color:var(--on-surface); }
 .upload-btn--primary { background:var(--primary); color:var(--on-primary); box-shadow:0 2px 8px rgba(76,112,64,0.3); }
 .upload-btn--primary:hover { box-shadow:0 4px 16px rgba(76,112,64,0.4); transform:translateY(-1px); }
+
+@keyframes spin { 100% { transform:rotate(360deg); } }

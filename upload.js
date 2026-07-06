@@ -66,17 +66,29 @@ document.addEventListener('DOMContentLoaded', () => {
   if (overlay) overlay.addEventListener('click', closeModal);
   if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 
-  // === Google Login ===
+  // === Email/Password Login ===
   if (loginBtn) {
     loginBtn.addEventListener('click', async () => {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-pass').value;
+
+      if (!email || !password) {
+        return alert('Isi email dan password dulu ya bro!');
+      }
+
       try {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        await auth.signInWithPopup(provider);
+        loginBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;animation:spin 1s linear infinite;">progress_activity</span> Loading...';
+        loginBtn.disabled = true;
+
+        await auth.signInWithEmailAndPassword(email, password);
         currentUser = auth.currentUser;
         showState(formState);
       } catch (err) {
         console.error('Login error:', err);
         alert('Login gagal: ' + err.message);
+      } finally {
+        loginBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">login</span> Masuk';
+        loginBtn.disabled = false;
       }
     });
   }
