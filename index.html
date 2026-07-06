@@ -532,13 +532,10 @@
             <span class="material-symbols-outlined">photo_library</span>
             Photo Archive
           </h2>
-          <div class="gallery-filters" style="display:flex; align-items:center; gap:var(--space-sm); flex-wrap:wrap;">
+          <div class="gallery-filters">
             <button class="gallery-filter-btn active label-md" data-gallery-filter="all">ALL</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="hangout">HANGOUTS</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="trip">TRIPS</button>
-            <button id="open-upload-modal" class="organic-btn label-md" style="margin-left: auto; display:flex; align-items:center; gap:4px; padding:8px 16px; background:var(--primary); color:var(--on-primary); border-radius:var(--radius-full);">
-              <span class="material-symbols-outlined" style="font-size:18px;">cloud_upload</span> UPLOAD
-            </button>
           </div>
         </div>
         <div class="masonry">
@@ -587,89 +584,6 @@
     </div>
   </footer>
 
-  <!-- ===== UPLOAD MODAL ===== -->
-  <div class="upload-modal" id="upload-modal">
-    <div class="upload-modal__overlay" id="upload-modal-overlay"></div>
-    <div class="upload-modal__content">
-      <!-- Close Button -->
-      <button class="upload-modal__close" id="upload-modal-close">
-        <span class="material-symbols-outlined">close</span>
-      </button>
-
-      <!-- Step 1: Pick Photo -->
-      <div class="upload-step" id="upload-step-1">
-        <div class="upload-modal__icon-wrap">
-          <span class="material-symbols-outlined">add_a_photo</span>
-        </div>
-        <h2 class="upload-modal__title headline-md">Share a Moment</h2>
-        <p class="upload-modal__desc body-md">Upload a photo to the MASSUM67 gallery for the crew to see.</p>
-        
-        <div class="upload-dropzone" id="upload-area">
-          <input type="file" id="upload-input" accept="image/*" hidden />
-          <div class="upload-dropzone__inner" id="upload-placeholder">
-            <span class="material-symbols-outlined upload-dropzone__icon">cloud_upload</span>
-            <p class="body-md"><strong>Click to browse</strong> or drag & drop</p>
-            <span class="label-sm" style="color:var(--on-surface-variant);">JPG, PNG, WEBP — Max 5MB</span>
-          </div>
-          <div class="upload-dropzone__preview" id="upload-preview-wrap" style="display:none;">
-            <img id="upload-preview" src="" alt="Preview" />
-            <button class="upload-dropzone__remove" id="upload-remove" type="button">
-              <span class="material-symbols-outlined" style="font-size:16px;">delete</span> Remove
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Step 2: Details -->
-      <div class="upload-step" id="upload-step-2" style="display:none;">
-        <div class="upload-modal__icon-wrap">
-          <span class="material-symbols-outlined">edit_note</span>
-        </div>
-        <h2 class="upload-modal__title headline-md">Add Details</h2>
-        <p class="upload-modal__desc body-md">Give this moment a title and pick a category.</p>
-
-        <div class="upload-form-group">
-          <label class="label-sm" for="upload-title">Caption</label>
-          <input type="text" id="upload-title" class="upload-input-field body-md" placeholder="e.g. Midnight Food Run 🍜" maxlength="60" />
-          <span class="upload-char-count label-sm" id="upload-char-count">0 / 60</span>
-        </div>
-
-        <div class="upload-form-group">
-          <label class="label-sm" for="upload-category">Category</label>
-          <div class="upload-category-picker">
-            <button class="upload-cat-btn active" data-cat="hangout" type="button">
-              <span class="material-symbols-outlined" style="font-size:18px;">groups</span> Hangout
-            </button>
-            <button class="upload-cat-btn" data-cat="trip" type="button">
-              <span class="material-symbols-outlined" style="font-size:18px;">flight_takeoff</span> Trip
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer Actions -->
-      <div class="upload-modal__actions">
-        <button class="upload-btn upload-btn--ghost" id="upload-modal-cancel">Cancel</button>
-        <div style="display:flex; gap:8px;">
-          <button class="upload-btn upload-btn--outline" id="upload-back" style="display:none;">
-            <span class="material-symbols-outlined" style="font-size:16px;">arrow_back</span> Back
-          </button>
-          <button class="upload-btn upload-btn--primary" id="upload-next" disabled>
-            Next <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
-          </button>
-          <button class="upload-btn upload-btn--primary" id="upload-modal-submit" style="display:none;">
-            <span class="material-symbols-outlined" style="font-size:16px;">cloud_upload</span> Upload Now
-          </button>
-        </div>
-      </div>
-
-      <!-- Progress indicator -->
-      <div class="upload-progress">
-        <div class="upload-progress__dot active" data-step="1"></div>
-        <div class="upload-progress__dot" data-step="2"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- Scripts -->
   <script src="./app.js"></script>
