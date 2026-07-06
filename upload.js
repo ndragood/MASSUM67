@@ -93,6 +93,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // === Email/Password Register ===
+  const registerBtn = document.getElementById('upload-register-btn');
+  if (registerBtn) {
+    registerBtn.addEventListener('click', async () => {
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-pass').value;
+
+      if (!email || !password) {
+        return alert('Isi email dan password dulu ya bro untuk daftar!');
+      }
+      if (password.length < 6) {
+        return alert('Password minimal 6 karakter bro!');
+      }
+
+      try {
+        registerBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;animation:spin 1s linear infinite;">progress_activity</span> Loading...';
+        registerBtn.disabled = true;
+
+        await auth.createUserWithEmailAndPassword(email, password);
+        currentUser = auth.currentUser;
+        alert('Berhasil daftar & otomatis login!');
+        showState(formState);
+      } catch (err) {
+        console.error('Register error:', err);
+        alert('Daftar gagal: ' + err.message);
+      } finally {
+        registerBtn.innerHTML = '<span class="material-symbols-outlined" style="font-size:18px;">person_add</span> Daftar Akun Baru';
+        registerBtn.disabled = false;
+      }
+    });
+  }
+
   // === File Handling ===
   if (uploadArea) {
     uploadArea.addEventListener('click', (e) => {
