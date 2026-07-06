@@ -36,10 +36,63 @@ document.addEventListener('DOMContentLoaded', () => {
   let selectedCategory = 'hangout';
   let currentUser = null;
 
+  // === Navbar Profile Elements ===
+  const navLoginBtn = document.getElementById('nav-login-btn');
+  const navUserBtn = document.getElementById('nav-user-btn');
+  const navUserName = document.getElementById('nav-user-name');
+  const navUserAvatar = document.getElementById('nav-user-avatar');
+  const navProfileDropdown = document.getElementById('nav-profile-dropdown');
+  const navLogoutBtn = document.getElementById('nav-logout-btn');
+
+  if (navLoginBtn) {
+    navLoginBtn.addEventListener('click', () => {
+      openModal();
+      showState(loginState);
+    });
+  }
+
+  if (navUserBtn && navProfileDropdown) {
+    navUserBtn.addEventListener('click', () => {
+      navProfileDropdown.style.display = navProfileDropdown.style.display === 'none' ? 'block' : 'none';
+    });
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!navUserBtn.contains(e.target) && !navProfileDropdown.contains(e.target)) {
+        navProfileDropdown.style.display = 'none';
+      }
+    });
+  }
+
+  if (navLogoutBtn) {
+    navLogoutBtn.addEventListener('click', async () => {
+      try {
+        await auth.signOut();
+        navProfileDropdown.style.display = 'none';
+        alert('Berhasil logout!');
+      } catch (err) {
+        console.error('Logout error:', err);
+      }
+    });
+  }
+
   // === Auth State ===
   if (typeof auth !== 'undefined') {
     auth.onAuthStateChanged(user => {
       currentUser = user;
+      
+      // Update Navbar
+      if (user) {
+        if (navLoginBtn) navLoginBtn.style.display = 'none';
+        if (navUserBtn) navUserBtn.style.display = 'flex';
+        
+        const name = user.displayName || user.email.split('@')[0] || 'User';
+        if (navUserName) navUserName.textContent = name;
+        if (navUserAvatar) navUserAvatar.textContent = name.charAt(0).toUpperCase();
+      } else {
+        if (navLoginBtn) navLoginBtn.style.display = 'flex';
+        if (navUserBtn) navUserBtn.style.display = 'none';
+        if (navProfileDropdown) navProfileDropdown.style.display = 'none';
+      }
     });
   }
 

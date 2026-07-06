@@ -33,12 +33,33 @@
         <a class="navbar__link" data-nav="about" href="#about">About</a>
         <a class="navbar__link" data-nav="gallery" href="#gallery">Gallery</a>
       </div>
-      <div class="navbar__actions" style="display:flex; align-items:center; gap:var(--space-md);">
+      <div class="navbar__actions" style="display:flex; align-items:center; gap:12px;">
+        <!-- Auth Profile -->
+        <div id="nav-profile-container" style="position:relative;">
+          <button id="nav-login-btn" class="organic-btn label-sm" style="display:none; align-items:center; gap:4px; padding:6px 12px; background:var(--surface-container-high); color:var(--on-surface); border-radius:999px; border:1px solid var(--outline-variant); cursor:pointer;">
+            <span class="material-symbols-outlined" style="font-size:16px;">login</span> Login
+          </button>
+          
+          <button id="nav-user-btn" class="organic-btn label-sm" style="display:none; align-items:center; gap:6px; padding:4px 12px 4px 4px; background:var(--primary-container); color:var(--on-primary-container); border-radius:999px; border:none; cursor:pointer;">
+            <div style="width:28px; height:28px; background:var(--primary); color:var(--on-primary); border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:700;" id="nav-user-avatar">
+              U
+            </div>
+            <span id="nav-user-name" style="font-weight:600; max-width:80px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">User</span>
+          </button>
+
+          <!-- Dropdown -->
+          <div id="nav-profile-dropdown" style="display:none; position:absolute; top:calc(100% + 8px); right:0; background:var(--surface); border:1px solid var(--outline-variant); border-radius:12px; padding:8px; box-shadow:0 8px 24px rgba(0,0,0,0.15); z-index:100; min-width:140px;">
+            <button id="nav-logout-btn" style="width:100%; display:flex; align-items:center; gap:8px; padding:8px 12px; background:none; border:none; color:#c62828; cursor:pointer; font-family:inherit; font-size:14px; font-weight:500; border-radius:8px; transition:background 0.2s;">
+              <span class="material-symbols-outlined" style="font-size:18px;">logout</span> Logout
+            </button>
+          </div>
+        </div>
+
         <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Dark Mode"
-          style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:var(--surface-container-high); color:var(--on-surface);">
+          style="display:flex; align-items:center; justify-content:center; width:40px; height:40px; border-radius:50%; background:var(--surface-container-high); color:var(--on-surface); border:none; cursor:pointer;">
           <span class="material-symbols-outlined theme-icon">dark_mode</span>
         </button>
-        <button class="navbar__mobile-toggle">
+        <button class="navbar__mobile-toggle" style="background:none; border:none; color:var(--on-surface); cursor:pointer;">
           <span class="material-symbols-outlined" style="font-size:32px;">menu</span>
         </button>
       </div>
