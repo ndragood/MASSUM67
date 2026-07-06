@@ -237,3 +237,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initRevealAnimations();
 });
+
+
+// ===== UPLOAD MODAL LOGIC =====
+document.addEventListener('DOMContentLoaded', () => {
+  const modal = document.getElementById('upload-modal');
+  const btnOpen = document.getElementById('open-upload-modal');
+  const btnClose = document.getElementById('upload-modal-close');
+  const btnCancel = document.getElementById('upload-modal-cancel');
+  const overlay = document.getElementById('upload-modal-overlay');
+  
+  const uploadArea = document.getElementById('upload-area');
+  const uploadInput = document.getElementById('upload-input');
+  const uploadPreview = document.getElementById('upload-preview');
+  const uploadPlaceholder = document.getElementById('upload-placeholder');
+  const btnSubmit = document.getElementById('upload-modal-submit');
+
+  function openModal() { modal.classList.add('active'); document.body.style.overflow = 'hidden'; }
+  function closeModal() { modal.classList.remove('active'); document.body.style.overflow = ''; resetForm(); }
+
+  if(btnOpen) btnOpen.addEventListener('click', openModal);
+  if(btnClose) btnClose.addEventListener('click', closeModal);
+  if(btnCancel) btnCancel.addEventListener('click', closeModal);
+  if(overlay) overlay.addEventListener('click', closeModal);
+
+  // File Input Logic
+  if(uploadArea) {
+    uploadArea.addEventListener('click', () => uploadInput.click());
+    
+    // Drag & Drop
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = 'var(--primary)';
+    });
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.style.borderColor = '';
+    });
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.style.borderColor = '';
+      if(e.dataTransfer.files.length > 0) {
+        uploadInput.files = e.dataTransfer.files;
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+  }
+
+  if(uploadInput) {
+    uploadInput.addEventListener('change', function() {
+      if(this.files && this.files[0]) handleFile(this.files[0]);
+    });
+  }
+
+  function handleFile(file) {
+    if(!file.type.startsWith('image/')) return alert('Please select an image file!');
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      uploadPreview.src = e.target.result;
+      uploadPreview.style.display = 'block';
+      uploadPlaceholder.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function resetForm() {
+    uploadInput.value = '';
+    uploadPreview.src = '';
+    uploadPreview.style.display = 'none';
+    uploadPlaceholder.style.display = 'block';
+    document.getElementById('upload-title').value = '';
+  }
+
+  if(btnSubmit) {
+    btnSubmit.addEventListener('click', () => {
+      if(!uploadInput.files.length) return alert('Pilih foto dulu bro!');
+      
+      // Simulate upload
+      btnSubmit.textContent = 'Uploading...';
+      btnSubmit.disabled = true;
+      setTimeout(() => {
+        alert('Fitur Upload belum tersambung ke Database! Ini baru tampilannya saja.');
+        btnSubmit.textContent = 'Upload Now';
+        btnSubmit.disabled = false;
+        closeModal();
+      }, 1000);
+    });
+  }
+});

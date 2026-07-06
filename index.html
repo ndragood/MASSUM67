@@ -532,10 +532,13 @@
             <span class="material-symbols-outlined">photo_library</span>
             Photo Archive
           </h2>
-          <div class="gallery-filters">
+          <div class="gallery-filters" style="display:flex; align-items:center; gap:var(--space-sm); flex-wrap:wrap;">
             <button class="gallery-filter-btn active label-md" data-gallery-filter="all">ALL</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="hangout">HANGOUTS</button>
             <button class="gallery-filter-btn label-md" data-gallery-filter="trip">TRIPS</button>
+            <button id="open-upload-modal" class="organic-btn label-md" style="margin-left: auto; display:flex; align-items:center; gap:4px; padding:8px 16px; background:var(--primary); color:var(--on-primary); border-radius:var(--radius-full);">
+              <span class="material-symbols-outlined" style="font-size:18px;">cloud_upload</span> UPLOAD
+            </button>
           </div>
         </div>
         <div class="masonry">
@@ -583,6 +586,45 @@
       </div>
     </div>
   </footer>
+
+  <!-- ===== UPLOAD MODAL ===== -->
+  <div class="upload-modal" id="upload-modal">
+    <div class="upload-modal__overlay" id="upload-modal-overlay"></div>
+    <div class="upload-modal__content organic-card">
+      <div class="upload-modal__header">
+        <h2 class="headline-md">Upload Moment</h2>
+        <button class="upload-modal__close" id="upload-modal-close">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="upload-modal__body">
+        <div class="upload-area" id="upload-area">
+          <input type="file" id="upload-input" accept="image/*" hidden />
+          <div class="upload-area__placeholder" id="upload-placeholder">
+            <span class="material-symbols-outlined" style="font-size: 48px; color: var(--primary);">add_photo_alternate</span>
+            <p class="body-md">Drag & drop your photo here or <span style="color:var(--primary); font-weight:600; cursor:pointer;">Browse</span></p>
+          </div>
+          <img id="upload-preview" class="upload-area__preview" src="" alt="Preview" style="display:none;" />
+        </div>
+        <div class="upload-modal__form">
+          <label class="label-sm" for="upload-title">Photo Title / Caption</label>
+          <input type="text" id="upload-title" class="organic-input body-md" placeholder="e.g. Midnight Food Run 🍜" />
+          
+          <label class="label-sm" for="upload-category" style="margin-top:16px; display:block;">Category</label>
+          <select id="upload-category" class="organic-input body-md">
+            <option value="hangout">Hangout</option>
+            <option value="trip">Trip</option>
+          </select>
+        </div>
+      </div>
+      <div class="upload-modal__footer">
+        <button class="organic-btn organic-btn--outline" id="upload-modal-cancel">Cancel</button>
+        <button class="organic-btn" id="upload-modal-submit" style="background:var(--primary); color:var(--on-primary);">
+          Upload Now
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- Scripts -->
   <script src="./app.js"></script>
