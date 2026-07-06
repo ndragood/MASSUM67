@@ -163,7 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function handleFile(file) {
     if (!file.type.startsWith('image/')) return alert('Pilih file gambar ya!');
-    if (file.size > 5 * 1024 * 1024) return alert('Max 5MB bro!');
+    if (file.size > 10 * 1024 * 1024) return alert('Max 10MB bro!');
     const reader = new FileReader();
     reader.onload = (e) => {
       uploadPreview.src = e.target.result;
